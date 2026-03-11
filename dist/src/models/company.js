@@ -34,7 +34,7 @@ __decorate([
 ], Company.prototype, "email", void 0);
 __decorate([
     sequelize_typescript_1.Column,
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], Company.prototype, "phone", void 0);
 __decorate([
     sequelize_typescript_1.Column,

@@ -8,7 +8,7 @@ interface CompanyAttributes{
   description: string; 
   industry: string ; 
   email: string ; 
-  phone: number ; 
+  phone: string ; 
   personnel: number ; 
 } 
 
@@ -39,7 +39,7 @@ export class Company extends Model<CompanyAttributes, CompanyCreationAttributes>
    email!: string; 
 
    @Column 
-   phone!: number; 
+   phone!: string; 
 
    @Column 
    personnel!: number; 

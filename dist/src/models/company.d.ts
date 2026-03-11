@@ -6,7 +6,7 @@ interface CompanyAttributes {
     description: string;
     industry: string;
     email: string;
-    phone: number;
+    phone: string;
     personnel: number;
 }
 interface CompanyCreationAttributes extends Optional<CompanyAttributes, 'id'> {
@@ -16,7 +16,7 @@ export declare class Company extends Model<CompanyAttributes, CompanyCreationAtt
     description?: string;
     industry: string;
     email: string;
-    phone: number;
+    phone: string;
     personnel: number;
     createdAt: Date;
     updatedAt: Date;

@@ -1,0 +1,118 @@
+import { RequestHandler, Request, Response } from "express";
+import { Company } from "../models/company"; 
+ 
+
+//Create new company 
+export const createCompany: RequestHandler = (req: Request, res: Response) => { 
+    //Validate request 
+    if (!req.body) { 
+        return res.status(400).json({ 
+        status: "error", 
+        message: "Content can not be empty", 
+        payload: null, 
+        }); 
+    } 
+    
+    // Save Company in the database 
+    const company = { ...req.body }; 
+    Company.create(company) 
+        .then((data: Company | null) => { 
+        res.status(200).json({ 
+            status: "success", 
+            message: "Product successfully created", 
+            payload: data, 
+        }); 
+        }) 
+        .catch((err) => { 
+        res.status(500).json({ 
+            status: "error", 
+            message: "Something happened creating a product. " + err.message, 
+            payload: null, 
+        }); 
+        }); 
+}; 
+
+// Get all companies 
+export const getAllCompanies: RequestHandler = async (req:Request, res:Response)=>{ 
+    try { 
+        const companies:Array<Company> = await Company.findAll(); 
+        return res.status(200).json(companies); 
+    } catch (error) { 
+        return res.status(500).json({ 
+        "message":"Error getting products",  
+        error 
+        }); 
+    } 
+};
+
+ 
+
+// Get company by Id 
+export const getCompanyById: RequestHandler = async (req:Request, res:Response)=>{ 
+    const id = Number(req.params.id)
+    try { 
+        const company:Company | null = await Company.findByPk(id); 
+        return res.status(200).json(company); 
+    } catch (error) { 
+        return res.status(500).json({ 
+        "message":"Error getting products",  
+        error 
+        }); 
+    } 
+};
+
+ 
+
+// Modify company 
+export const updateCompany:RequestHandler = (req: Request, res: Response) => { 
+    // Validate request 
+    if (!req.body) { 
+        return res.status(400).json({ 
+        status: "error", 
+        message: "Content can not be empty.", 
+        payload: null, 
+        }); 
+    } 
+
+    // Save Company in the database 
+    Company.update({ ...req.body }, { where: { id: req.params.id } }) 
+    .then((isUpdated) => { 
+        if (isUpdated) { 
+        return res.status(200).json({ 
+            status: "success", 
+            message: "Product successfully updated", 
+            payload: { ...req.body }, 
+        }); 
+        } else { 
+        return res.status(500).json({ 
+            status: "error", 
+            message: "Something happened updating the product. ", 
+            payload: null, 
+        }); 
+    } 
+    }) 
+    .catch((err) => { 
+        res.status(500).json({ 
+        status: "error", 
+        message: "Something happened updating a product. " + err.message, 
+        payload: null, 
+    }); 
+    }); 
+}; 
+ 
+// Delete a Product with the specified id in the request 
+
+export const deleteCompany: RequestHandler = async (req: Request, res: Response): Promise<void> => { 
+    const { id } = req.body; 
+    try { 
+        await Company.destroy({ where: { id } }); 
+        res.status(200).json({ message: "Product deleted" }); 
+    } catch (error) { 
+        res.status(500).json({ 
+            message: "Error deleting products", 
+            error, 
+        }); 
+    } 
+}; 
+
+
