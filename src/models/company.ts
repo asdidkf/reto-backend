@@ -17,7 +17,7 @@ interface CompanyAttributes{
 interface CompanyCreationAttributes extends Optional<CompanyAttributes, 'id'>{} 
 
 @Table ({ 
-  tableName: "Companies" 
+  tableName: "companies" 
 }) 
 export class Company extends Model<CompanyAttributes, CompanyCreationAttributes>{ 
 

@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteCompany = exports.updateCompany = exports.getCompanyById = exports.getAllCompanies = exports.createCompany = void 0;
 const company_1 = require("../models/company");
+const user_1 = require("../models/user");
 //Create new company 
 const createCompany = (req, res) => {
     //Validate request 
@@ -43,7 +44,12 @@ exports.createCompany = createCompany;
 // Get all companies 
 const getAllCompanies = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const companies = yield company_1.Company.findAll();
+        const companies = yield company_1.Company.findAll({
+            include: [{
+                    model: user_1.User,
+                    attributes: { exclude: ["password", "companyId", "createdAt", "updatedAt"] }
+                }]
+        });
         return res.status(200).json(companies);
     }
     catch (error) {
@@ -58,7 +64,12 @@ exports.getAllCompanies = getAllCompanies;
 const getCompanyById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = Number(req.params.id);
     try {
-        const company = yield company_1.Company.findByPk(id);
+        const company = yield company_1.Company.findByPk(id, {
+            include: [{
+                    model: user_1.User,
+                    attributes: { exclude: ["password", "companyId", "createdAt", "updatedAt"] }
+                }]
+        });
         return res.status(200).json(company);
     }
     catch (error) {

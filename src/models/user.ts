@@ -15,7 +15,7 @@ interface UserAttributes{
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'>{} 
 
 @Table ({ 
-  tableName: "Users" 
+  tableName: "users" 
 }) 
 export class User extends Model<UserAttributes, UserCreationAttributes>{ 
 
@@ -41,7 +41,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes>{
    })
    declare companyId: number | null;
 
-   @BelongsTo(() => Company, { foreignKey: "categoryId"})
+   @BelongsTo(() => Company, { foreignKey: "companyId"})
    declare company?: Company | null;
 
    @CreatedAt 

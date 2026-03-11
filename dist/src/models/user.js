@@ -9,59 +9,57 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Company = void 0;
+exports.User = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
-const user_1 = require("../models/user");
-let Company = class Company extends sequelize_typescript_1.Model {
+const company_1 = require("../models/company");
+let User = class User extends sequelize_typescript_1.Model {
 };
-exports.Company = Company;
+exports.User = User;
 __decorate([
     sequelize_typescript_1.Column,
     __metadata("design:type", String)
-], Company.prototype, "name", void 0);
+], User.prototype, "name", void 0);
 __decorate([
+    sequelize_typescript_1.Column,
+    __metadata("design:type", String)
+], User.prototype, "email", void 0);
+__decorate([
+    sequelize_typescript_1.Column,
+    __metadata("design:type", String)
+], User.prototype, "phone", void 0);
+__decorate([
+    sequelize_typescript_1.Column,
+    __metadata("design:type", String)
+], User.prototype, "password", void 0);
+__decorate([
+    sequelize_typescript_1.Column,
+    __metadata("design:type", Boolean)
+], User.prototype, "isAdmin", void 0);
+__decorate([
+    (0, sequelize_typescript_1.ForeignKey)(() => company_1.Company),
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING
+        type: sequelize_typescript_1.DataType.INTEGER,
+        allowNull: true,
     }),
-    __metadata("design:type", String)
-], Company.prototype, "description", void 0);
+    __metadata("design:type", Object)
+], User.prototype, "companyId", void 0);
 __decorate([
-    sequelize_typescript_1.Column,
-    __metadata("design:type", String)
-], Company.prototype, "industry", void 0);
-__decorate([
-    sequelize_typescript_1.Column,
-    __metadata("design:type", String)
-], Company.prototype, "email", void 0);
-__decorate([
-    sequelize_typescript_1.Column,
-    __metadata("design:type", String)
-], Company.prototype, "phone", void 0);
-__decorate([
-    sequelize_typescript_1.Column,
-    __metadata("design:type", Number)
-], Company.prototype, "personnel", void 0);
-__decorate([
-    sequelize_typescript_1.Column,
-    __metadata("design:type", String)
-], Company.prototype, "location", void 0);
+    (0, sequelize_typescript_1.BelongsTo)(() => company_1.Company, { foreignKey: "companyId" }),
+    __metadata("design:type", Object)
+], User.prototype, "company", void 0);
 __decorate([
     sequelize_typescript_1.CreatedAt,
     sequelize_typescript_1.Column,
     __metadata("design:type", Date)
-], Company.prototype, "createdAt", void 0);
+], User.prototype, "createdAt", void 0);
 __decorate([
     sequelize_typescript_1.UpdatedAt,
     sequelize_typescript_1.Column,
     __metadata("design:type", Date)
-], Company.prototype, "updatedAt", void 0);
-__decorate([
-    (0, sequelize_typescript_1.HasMany)(() => user_1.User),
-    __metadata("design:type", Array)
-], Company.prototype, "users", void 0);
-exports.Company = Company = __decorate([
+], User.prototype, "updatedAt", void 0);
+exports.User = User = __decorate([
     (0, sequelize_typescript_1.Table)({
-        tableName: "companies"
+        tableName: "users"
     })
-], Company);
-//# sourceMappingURL=company.js.map
+], User);
+//# sourceMappingURL=user.js.map

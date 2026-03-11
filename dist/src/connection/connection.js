@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
 const company_1 = require("../models/company");
+const user_1 = require("../models/user");
 const connection = new sequelize_typescript_1.Sequelize({
     database: 'reto_db',
     dialect: 'postgres',
@@ -18,14 +19,15 @@ const connection = new sequelize_typescript_1.Sequelize({
     password: 'HDK#$%Ljkwerff.89',
     storage: ':memory:',
     models: [
-        company_1.Company
+        company_1.Company,
+        user_1.User
     ]
 });
 function connectionDB() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield connection.authenticate(); // authenticate verifica la conexión
-            console.log("Conexión exitosa a la base de datos MySQL.");
+            console.log("Conexión exitosa a la base de datos.");
             yield connection.sync();
         }
         catch (e) {

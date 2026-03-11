@@ -39,7 +39,7 @@ export const getAllCompanies: RequestHandler = async (req:Request, res:Response)
         const companies:Array<Company> = await Company.findAll({
             include: [{
                 model: User,
-                attributes: { exclude: ["password"] }}]
+                attributes: { exclude: ["password", "companyId", "createdAt", "updatedAt"] }}]
         }); 
         return res.status(200).json(companies); 
     } catch (error) { 
@@ -59,7 +59,7 @@ export const getCompanyById: RequestHandler = async (req:Request, res:Response)=
         const company:Company | null = await Company.findByPk(id, {
             include: [{
                 model: User,
-                attributes: { exclude: ["password"] }}]
+                attributes: { exclude: ["password", "companyId", "createdAt", "updatedAt"] }}]
         }); 
         return res.status(200).json(company); 
     } catch (error) { 
