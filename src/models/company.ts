@@ -1,6 +1,7 @@
 
-import {Table, Model, Column, CreatedAt, UpdatedAt, DataType} from 'sequelize-typescript'; 
+import {Table, Model, Column, CreatedAt, UpdatedAt, DataType, HasMany} from 'sequelize-typescript'; 
 import {Optional} from 'sequelize'; 
+import { User } from "../models/user";
 
 interface CompanyAttributes{ 
   id: number; 
@@ -10,6 +11,7 @@ interface CompanyAttributes{
   email: string ; 
   phone: string ; 
   personnel: number ; 
+  location: string ;
 } 
 
 interface CompanyCreationAttributes extends Optional<CompanyAttributes, 'id'>{} 
@@ -44,6 +46,9 @@ export class Company extends Model<CompanyAttributes, CompanyCreationAttributes>
    @Column 
    personnel!: number; 
 
+   @Column 
+   location!: string; 
+
    @CreatedAt 
    @Column 
    createdAt!: Date; 
@@ -51,4 +56,7 @@ export class Company extends Model<CompanyAttributes, CompanyCreationAttributes>
    @UpdatedAt 
    @Column 
    updatedAt!: Date; 
+
+   @HasMany(() => User)
+   declare users?: User[];
 } 

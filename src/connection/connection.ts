@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import { Company } from "../models/company"; 
+import { User } from "../models/user";
 
 const connection = new Sequelize({ 
     database: 'reto_db', 
@@ -8,7 +9,8 @@ const connection = new Sequelize({
     password: 'HDK#$%Ljkwerff.89', 
     storage: ':memory:', 
     models: [
-        Company
+        Company,
+        User
     ] 
 }); 
 

@@ -1,5 +1,6 @@
 import { RequestHandler, Request, Response } from "express";
 import { Company } from "../models/company"; 
+import { User } from "../models/user";
  
 
 //Create new company 
@@ -35,7 +36,11 @@ export const createCompany: RequestHandler = (req: Request, res: Response) => {
 // Get all companies 
 export const getAllCompanies: RequestHandler = async (req:Request, res:Response)=>{ 
     try { 
-        const companies:Array<Company> = await Company.findAll(); 
+        const companies:Array<Company> = await Company.findAll({
+            include: [{
+                model: User,
+                attributes: { exclude: ["password"] }}]
+        }); 
         return res.status(200).json(companies); 
     } catch (error) { 
         return res.status(500).json({ 
@@ -51,7 +56,11 @@ export const getAllCompanies: RequestHandler = async (req:Request, res:Response)
 export const getCompanyById: RequestHandler = async (req:Request, res:Response)=>{ 
     const id = Number(req.params.id)
     try { 
-        const company:Company | null = await Company.findByPk(id); 
+        const company:Company | null = await Company.findByPk(id, {
+            include: [{
+                model: User,
+                attributes: { exclude: ["password"] }}]
+        }); 
         return res.status(200).json(company); 
     } catch (error) { 
         return res.status(500).json({ 
