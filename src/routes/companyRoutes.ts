@@ -1,26 +1,24 @@
+import { Router } from 'express';
+import { 
+    createCompany,  
+    deleteCompany,  
+    getAllCompanies,  
+    getCompanyById,  
+    updateCompany  
+} from '../controllers/companyController'; 
 
-import { Router, Request, Response } from 'express';  
 const companyRouter:Router = Router();  
 
-companyRouter.get('/', (req:Request, res:Response) => {  
-res.send('Get a list of all companies')  
-});  
+companyRouter.get('/', getAllCompanies);  
 
-companyRouter.get('/:id', (req:Request, res:Response) => {  
-res.send(`Get the company with id:  ${req.params.id}`)  
-});  
+companyRouter.get('/:id', getCompanyById);  
 
-companyRouter.post('/', (req:Request, res:Response) => {  
-res.send(`Add a new company with ID: ${req.body.id}`)  
-});  
+companyRouter.post('/', createCompany);  
 
-companyRouter.patch('/:id', (req:Request, res:Response) => {  
-res.send(`Update the data of company ${req.params.id} with the values of ${req.body.name}, ${req.body.price} and ${req.body.stock}`)  
-});  
+companyRouter.patch('/:id', updateCompany);  
 
-companyRouter.delete('/', (req:Request, res:Response) => {  
-res.send(`Deleting the company ${req.body.id}`)  
-});  
+companyRouter.delete('/', deleteCompany);  
 
 export default companyRouter; 
+
 

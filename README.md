@@ -1,8 +1,8 @@
 # reto-backend
 
-Proyecto Reto Backend
+Reto Backend Project
 Tech: :nodejs :express :sequelize :postgresql
 
 ## Descripcion
 
-Ejemplo de operaciones CRUD aplicadas para un directorio de empresas.
+Example of CRUD operations in a directory for businesses
